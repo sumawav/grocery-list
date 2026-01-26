@@ -29,7 +29,7 @@ function App() {
 		<div className="wrapper">
 			<Header />
 			<TODOHero todos_completed={0} total_todos={0} />
-			<Form />
+			<Form todos={todos} setTodos={setTodos}/>
 			<TODOList todos={todos} setTodos={setTodos} />
 		</div>
 	);

@@ -1,8 +1,19 @@
 // src/components/Form.jsx
 
-function Form() {
+function Form({ todos, setTodos }) {
 	const handleSubmit = (event) => {
 		event.preventDefault();
+
+		const text = event.target.todo.value;
+		if (text === "") return;
+
+		const newTodo = {
+			title: event.target.todo.value,
+			id: window.self.crypto.randomUUID(),
+			is_completed: false,
+		};
+		setTodos([...todos, newTodo]);
+
 		// reset the form
 		event.target.reset();
 	};
@@ -16,11 +27,8 @@ function Form() {
 					placeholder="Write your next task"
 				/>
 			</label>
-			<button>
+			<button type="submit">
 				<span className="visually-hidden">Submit</span>
-				<svg>
-					<path d="" />
-				</svg>
 			</button>
 		</form>
 	);
