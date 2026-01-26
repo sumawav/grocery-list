@@ -24,7 +24,6 @@ function TODOList({ todos, setTodos }) {
 
 function Item({ item, setTodos, handleDeleteTodo }) {
 
-	const handleDeleteClick = () => handleDeleteTodo(item.id);
 	return (
 		<li id={item?.id} className="todo_item">
 			<button className="todo_items_left">
@@ -34,7 +33,7 @@ function Item({ item, setTodos, handleDeleteTodo }) {
 				<button>
 					<span className="visually-hidden">Edit</span>
 				</button>
-				<button onClick={handleDeleteClick}>
+				<button onClick={() => handleDeleteTodo(item.id)}>
 					<span className="visually-hidden">Delete</span>
 				</button>
 			</div>
