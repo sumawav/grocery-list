@@ -1,5 +1,4 @@
 // src/components/Form.jsx
-'use client'
 
 function Form() {
 	const handleSubmit = (event) => {
