@@ -3,7 +3,6 @@
 function TODOList({ todos, setTodos }) {
 	const handleDeleteTodo = (id) => {
 		const newTodos = todos.filter((todo) => todo.id !== id);
-		console.log(newTodos);
 		setTodos(newTodos);
 	};
 	return (
