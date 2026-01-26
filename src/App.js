@@ -16,7 +16,7 @@ function App() {
 		{
 			title: "Some other task",
 			id: window.self.crypto.randomUUID(),
-			is_completed: true,
+			is_completed: false,
 		},
 		{
 			title: "last task",

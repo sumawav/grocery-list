@@ -23,13 +23,26 @@ function TODOList({ todos, setTodos }) {
 }
 
 function Item({ item, setTodos, handleDeleteTodo }) {
+	const handleToggleTodo = (id) => {
+		setTodos((prevTodos) => 
+			prevTodos.map((todo) =>
+				todo.id === id
+					? { ...todo, is_completed: !todo.is_completed }
+					: todo
+			)
+		);
+	};
 
 	return (
 		<li id={item?.id} className="todo_item">
-			<button className="todo_items_left">
+			<button
+				onClick={() => handleToggleTodo(item.id)}
+				className="todo_items_left"
+			>
 				<p>{item?.title}</p>
 			</button>
 			<div className="todo_items_right">
+				<span>{item.is_completed ? "COMPLETE" : ""}</span>
 				<button>
 					<span className="visually-hidden">Edit</span>
 				</button>
