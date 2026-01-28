@@ -1,4 +1,5 @@
 // src/components/TODOList.jsx
+import React from "react";
 
 function TODOList({ todos, setTodos }) {
 	const handleDeleteTodo = (id) => {
@@ -22,14 +23,19 @@ function TODOList({ todos, setTodos }) {
 }
 
 function Item({ item, setTodos, handleDeleteTodo }) {
+	const [isEditing, setEditing] = React.useState(false);
 	const handleToggleTodo = (id) => {
-		setTodos((prevTodos) => 
+		setTodos((prevTodos) =>
 			prevTodos.map((todo) =>
 				todo.id === id
 					? { ...todo, is_completed: !todo.is_completed }
 					: todo
 			)
 		);
+	};
+
+	const handleToggleEdit = () => {
+		setEditing((e) => !e);
 	};
 
 	return (
@@ -42,8 +48,10 @@ function Item({ item, setTodos, handleDeleteTodo }) {
 			</button>
 			<div className="todo_items_right">
 				<span>{item.is_completed ? "COMPLETE" : ""}</span>
-				<button>
-					<span className="visually-hidden">Edit</span>
+				<button onClick={handleToggleEdit}>
+					<span className="visually-hidden">
+						{isEditing ? "Editing" : "Edit"}
+					</span>
 				</button>
 				<button onClick={() => handleDeleteTodo(item.id)}>
 					<span className="visually-hidden">Delete</span>
