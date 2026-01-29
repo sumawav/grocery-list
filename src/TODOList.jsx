@@ -41,7 +41,11 @@ function Item({ item, setTodos, handleDeleteTodo }) {
 	const handleUpdateTodo = (event) => {
 		event.preventDefault();
 		const text = event.target.updatetodo.value;
-		console.log(text);
+		// console.log(text);
+		setTodos((pTodos) =>
+			pTodos.map((t) => (t.id === item.id ? { ...t, title: text } : t))
+		);
+		setEditing((e) => !e);
 	};
 
 	return (
