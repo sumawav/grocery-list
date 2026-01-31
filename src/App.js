@@ -14,16 +14,19 @@ function App() {
 			title: "Some task",
 			id: window.self.crypto.randomUUID(),
 			is_completed: false,
+			category: "",
 		},
 		{
 			title: "Some other task",
 			id: window.self.crypto.randomUUID(),
 			is_completed: false,
+			category: "",
 		},
 		{
 			title: "last task",
 			id: window.self.crypto.randomUUID(),
 			is_completed: false,
+			category: "",
 		},
 	]);
 
