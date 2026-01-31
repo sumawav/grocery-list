@@ -11,22 +11,22 @@ import TODOList from "./TODOList";
 function App() {
 	const [todos, setTodos] = React.useState([
 		{
-			title: "Some task",
+			title: "Broccoli",
 			id: window.self.crypto.randomUUID(),
 			is_completed: false,
-			category: "",
+			category: "Wet Produce",
 		},
 		{
-			title: "Some other task",
+			title: "Garbanzo Beans",
 			id: window.self.crypto.randomUUID(),
 			is_completed: false,
-			category: "",
+			category: "Grocery",
 		},
 		{
-			title: "last task",
+			title: "Cajun Alfredo Pasta",
 			id: window.self.crypto.randomUUID(),
 			is_completed: false,
-			category: "",
+			category: "Fresh",
 		},
 	]);
 

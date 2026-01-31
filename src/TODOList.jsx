@@ -2,23 +2,37 @@
 import React from "react";
 
 function TODOList({ todos, setTodos }) {
+	const [isSorted, setSorted] = React.useState(false);
+
 	const handleDeleteTodo = (id) => {
 		const newTodos = todos.filter((todo) => todo.id !== id);
 		setTodos(newTodos);
 	};
+	const handleToggleSort = () => setSorted((pSort) => !pSort);
+	const alphabetic = (a, b) => (a.category < b.category ? -1 : 1);
+
 	return (
-		<ol className="todo_list">
-			{todos && todos.length > 0
-				? todos?.map((item, index) => (
-						<Item
-							key={index}
-							item={item}
-							setTodos={setTodos}
-							handleDeleteTodo={handleDeleteTodo}
-						/>
-					))
-				: null}
-		</ol>
+		<div>
+			<div className="todo_items_left">
+				<button onClick={handleToggleSort}>
+					<p>{isSorted ? "UNSORT" : "SORT"}</p>
+				</button>
+			</div>
+			<ol className="todo_list">
+				{todos && todos.length > 0
+					? todos
+							?.toSorted(isSorted ? alphabetic : undefined)
+							.map((item, index) => (
+								<Item
+									key={index}
+									item={item}
+									setTodos={setTodos}
+									handleDeleteTodo={handleDeleteTodo}
+								/>
+							))
+					: null}
+			</ol>
+		</div>
 	);
 }
 
@@ -65,12 +79,20 @@ function Item({ item, setTodos, handleDeleteTodo }) {
 					</button>
 				</form>
 			) : (
-				<button
-					onClick={() => handleToggleTodo(item.id)}
-					className="todo_items_left"
-				>
-					<p>{item?.title}</p>
-				</button>
+				<div className="todo_items_left">
+					<button
+						onClick={() => handleToggleTodo(item.id)}
+						// className="todo_items_left"
+					>
+						<p>{item?.title}</p>
+					</button>
+					<button
+						onClick={() => {}}
+						// className="todo_items_left"
+					>
+						<p>{item?.category || "uncategorized"}</p>
+					</button>
+				</div>
 			)}
 			<div className="todo_items_right">
 				<span>{item.is_completed ? "COMPLETE" : ""}</span>
