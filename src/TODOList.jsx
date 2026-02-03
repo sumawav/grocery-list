@@ -48,10 +48,6 @@ function Item({ item, setTodos, handleDeleteTodo }) {
 		);
 	};
 
-	const handleToggleEdit = () => {
-		setEditing((e) => !e);
-	};
-
 	const handleUpdateTodo = (event) => {
 		event.preventDefault();
 		const text = event.target.updatetodo.value;
@@ -61,46 +57,41 @@ function Item({ item, setTodos, handleDeleteTodo }) {
 		);
 		setEditing((e) => !e);
 	};
+	const handleUpdateTodos_WIP = (e) => {
+		const text = e.target.value;
+		setTodos((pTodos) =>
+			pTodos.map((pt) =>
+				pt.id === item.id ? { ...pt, title: text } : pt
+			)
+		);
+	};
 
 	return (
 		<li id={item?.id} className="todo_item">
-			{isEditing ? (
-				<form className="form" onSubmit={handleUpdateTodo}>
-					<label htmlFor="updatetodo">
-						<input
-							type="text"
-							name="updatetodo"
-							id="updatetodo"
-							placeholder="update todo"
-						/>
-					</label>
-					<button type="submit">
-						<span className="visually-hidden">Submit</span>
-					</button>
-				</form>
-			) : (
-				<div className="todo_items_left">
-					<button
-						onClick={() => handleToggleTodo(item.id)}
-						// className="todo_items_left"
-					>
-						<p>{item?.title}</p>
-					</button>
-					<button
-						onClick={() => {}}
-						// className="todo_items_left"
-					>
-						<p>{item?.category || "uncategorized"}</p>
-					</button>
-				</div>
-			)}
+			<div className="todo_items_left">
+				<label htmlFor="updatetodo">
+					<input
+						value={item?.title}
+						type="text"
+						name="updatetodo"
+						id="updatetodo"
+						placeholder="write something!"
+						onChange={handleUpdateTodos_WIP}
+					/>
+				</label>
+			</div>
+
+			<div className="todo_items_left">
+				<button
+					onClick={() => {}}
+					// className="todo_items_left"
+				>
+					<p>{item?.category || "uncategorized"}</p>
+				</button>
+			</div>
+
 			<div className="todo_items_right">
 				<span>{item.is_completed ? "COMPLETE" : ""}</span>
-				<button onClick={handleToggleEdit}>
-					<span className="visually-hidden">
-						{isEditing ? "Editing" : "Edit"}
-					</span>
-				</button>
 				<button onClick={() => handleDeleteTodo(item.id)}>
 					<span className="visually-hidden">Delete</span>
 				</button>
