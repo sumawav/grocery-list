@@ -82,6 +82,7 @@ function Item({ item, setTodos, handleDeleteTodo, handleEnterKey }) {
 						onKeyDown={(e) => {
 							if (e.key === "Enter") handleEnterKey(e);
 						}}
+						autoFocus={item.current}
 					/>
 				</label>
 			</div>
