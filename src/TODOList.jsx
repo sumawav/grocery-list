@@ -10,7 +10,18 @@ function TODOList({ todos, setTodos }) {
 	};
 	const handleToggleSort = () => setSorted((pSort) => !pSort);
 	const alphabetic = (a, b) => (a.category < b.category ? -1 : 1);
+	const handleEnterKey = (item) => {
+		const index = todos.findIndex((t) => t.id === item.id);
+		if (index < todos.length - 1) return;
 
+		const newTodo = {
+			title: "",
+			id: window.self.crypto.randomUUID(),
+			is_completed: false,
+			category: "Wet Produce",
+		};
+		setTodos((pTodos) => [...pTodos, newTodo]);
+	};
 	return (
 		<div>
 			<div className="todo_items_left">
@@ -27,6 +38,7 @@ function TODOList({ todos, setTodos }) {
 									key={index}
 									item={item}
 									setTodos={setTodos}
+									handleEnterKey={()=> handleEnterKey(item)}
 									handleDeleteTodo={handleDeleteTodo}
 								/>
 							))
@@ -36,7 +48,7 @@ function TODOList({ todos, setTodos }) {
 	);
 }
 
-function Item({ item, setTodos, handleDeleteTodo }) {
+function Item({ item, setTodos, handleDeleteTodo, handleEnterKey }) {
 	const [isEditing, setEditing] = React.useState(false);
 	const handleToggleTodo = (id) => {
 		setTodos((prevTodos) =>
@@ -47,16 +59,6 @@ function Item({ item, setTodos, handleDeleteTodo }) {
 			)
 		);
 	};
-
-	const handleUpdateTodo = (event) => {
-		event.preventDefault();
-		const text = event.target.updatetodo.value;
-		// console.log(text);
-		setTodos((pTodos) =>
-			pTodos.map((t) => (t.id === item.id ? { ...t, title: text } : t))
-		);
-		setEditing((e) => !e);
-	};
 	const handleUpdateTodos_WIP = (e) => {
 		const text = e.target.value;
 		setTodos((pTodos) =>
@@ -65,7 +67,7 @@ function Item({ item, setTodos, handleDeleteTodo }) {
 			)
 		);
 	};
-
+	
 	return (
 		<li id={item?.id} className="todo_item">
 			<div className="todo_items_left">
@@ -77,6 +79,9 @@ function Item({ item, setTodos, handleDeleteTodo }) {
 						id="updatetodo"
 						placeholder="write something!"
 						onChange={handleUpdateTodos_WIP}
+						onKeyDown={(e) => {
+							if (e.key === "Enter") handleEnterKey(e);
+						}}
 					/>
 				</label>
 			</div>
