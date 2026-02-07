@@ -1,5 +1,6 @@
 // src/components/TODOList.jsx
 import React from "react";
+import Categories from "./Categories";
 
 function TODOList({ todos, setTodos }) {
 	const [isSorted, setSorted] = React.useState(false);
@@ -94,6 +95,7 @@ function Item({ item, setTodos, handleDeleteTodo, handleEnterKey }) {
 				<button onClick={() => {}}>
 					<p>{item?.category || "uncategorized"}</p>
 				</button>
+				<Categories />
 			</div>
 
 			<div className="todo_items_right">
