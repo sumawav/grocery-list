@@ -1,13 +1,31 @@
 // src/Categories.jsx
 
-function Categories() {
+function Categories({ category }) {
+	const foodLibrary = {
+		Produce: [],
+		Meat: [],
+		Cheese: [],
+		Dairy: [],
+		Grocery: [],
+		Fresh: [],
+		Deli: [],
+		Cereal: [],
+		Bars: [],
+		Frozen: [],
+		Cookies: [],
+		Candy: [],
+		Snacks: [],
+		Haba: [],
+		DFN: [],
+	};
+
 	return (
-		<select name="selectedCategory">
-			<option value="Produce">Produce</option>
-			<option value="Meat">Meat</option>
-			<option value="Cheese">Cheese</option>
-			<option value="Dairy">Dairy</option>
-			<option value="Grocery">Grocery</option>
+		<select name="selectedCategory" defaultValue={category}>
+			{Object.keys(foodLibrary).map((title) => (
+				<option key={title} value={`${title}`}>
+					{title}
+				</option>
+			))}
 		</select>
 	);
 }

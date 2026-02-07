@@ -95,7 +95,7 @@ function Item({ item, setTodos, handleDeleteTodo, handleEnterKey }) {
 				<button onClick={() => {}}>
 					<p>{item?.category || "uncategorized"}</p>
 				</button>
-				<Categories />
+				<Categories category={item?.category}/>
 			</div>
 
 			<div className="todo_items_right">
