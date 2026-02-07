@@ -15,15 +15,13 @@ function TODOList({ todos, setTodos }) {
 
 	const handleEnterKey = (item) => {
 		const index = todos.findIndex((t) => t.id === item.id);
-		if (index < todos.length - 1) return;
-
 		const newTodo = {
 			title: "",
 			id: window.self.crypto.randomUUID(),
 			is_completed: false,
 			category: "Wet Produce",
 		};
-		setTodos((pTodos) => [...pTodos, newTodo]);
+		setTodos((pTodos) => pTodos.toSpliced(index + 1, 0, newTodo));
 	};
 	return (
 		<div>
