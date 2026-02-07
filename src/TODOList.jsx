@@ -8,8 +8,11 @@ function TODOList({ todos, setTodos }) {
 		const newTodos = todos.filter((todo) => todo.id !== id);
 		setTodos(newTodos);
 	};
+
 	const handleToggleSort = () => setSorted((pSort) => !pSort);
+
 	const alphabetic = (a, b) => (a.category < b.category ? -1 : 1);
+
 	const handleEnterKey = (item) => {
 		const index = todos.findIndex((t) => t.id === item.id);
 		if (index < todos.length - 1) return;
@@ -38,7 +41,7 @@ function TODOList({ todos, setTodos }) {
 									key={index}
 									item={item}
 									setTodos={setTodos}
-									handleEnterKey={()=> handleEnterKey(item)}
+									handleEnterKey={() => handleEnterKey(item)}
 									handleDeleteTodo={handleDeleteTodo}
 								/>
 							))
@@ -67,7 +70,7 @@ function Item({ item, setTodos, handleDeleteTodo, handleEnterKey }) {
 			)
 		);
 	};
-	
+
 	return (
 		<li id={item?.id} className="todo_item">
 			<div className="todo_items_left">
@@ -82,25 +85,21 @@ function Item({ item, setTodos, handleDeleteTodo, handleEnterKey }) {
 						onKeyDown={(e) => {
 							if (e.key === "Enter") handleEnterKey(e);
 						}}
-						autoFocus={item.current}
 					/>
 				</label>
+				<button onClick={() => handleDeleteTodo(item.id)}>
+					<span className="visually-hidden">&#10006;</span>
+				</button>
 			</div>
 
 			<div className="todo_items_left">
-				<button
-					onClick={() => {}}
-					// className="todo_items_left"
-				>
+				<button onClick={() => {}}>
 					<p>{item?.category || "uncategorized"}</p>
 				</button>
 			</div>
 
 			<div className="todo_items_right">
 				<span>{item.is_completed ? "COMPLETE" : ""}</span>
-				<button onClick={() => handleDeleteTodo(item.id)}>
-					<span className="visually-hidden">Delete</span>
-				</button>
 			</div>
 		</li>
 	);

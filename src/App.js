@@ -15,14 +15,12 @@ function App() {
 			id: window.self.crypto.randomUUID(),
 			is_completed: false,
 			category: "Wet Produce",
-			current: false,
 		},
 		{
 			title: "Garbanzo Beans",
 			id: window.self.crypto.randomUUID(),
 			is_completed: false,
 			category: "Grocery",
-			current: false,
 		},
 		{
 			title: "Cajun Alfredo Pasta",
