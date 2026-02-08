@@ -86,18 +86,11 @@ function Item({ item, setTodos, handleDeleteTodo, handleEnterKey }) {
 						}}
 					/>
 				</label>
+				<Categories category={item?.category} />
 				<button onClick={() => handleDeleteTodo(item.id)}>
 					<span className="visually-hidden">&#10006;</span>
 				</button>
 			</div>
-
-			<div className="todo_items_left">
-				<button onClick={() => {}}>
-					<p>{item?.category || "uncategorized"}</p>
-				</button>
-				<Categories category={item?.category}/>
-			</div>
-
 			<div className="todo_items_right">
 				<span>{item.is_completed ? "COMPLETE" : ""}</span>
 			</div>
