@@ -90,8 +90,6 @@ function Item({ item, setTodos, handleDeleteTodo, handleEnterKey }) {
 				<button onClick={() => handleDeleteTodo(item.id)}>
 					<span className="visually-hidden">&#10006;</span>
 				</button>
-			</div>
-			<div className="todo_items_right">
 				<span>{item.is_completed ? "COMPLETE" : ""}</span>
 			</div>
 		</li>
