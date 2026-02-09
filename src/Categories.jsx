@@ -20,7 +20,7 @@ function Categories({ category }) {
 	};
 
 	return (
-		<select name="selectedCategory" defaultValue={category}>
+		<select name="selectedCategory" value={category}>
 			{Object.keys(foodLibrary).map((title) => (
 				<option key={title} value={`${title}`}>
 					{title}
