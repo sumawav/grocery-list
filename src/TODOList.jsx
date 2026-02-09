@@ -69,7 +69,7 @@ function Item({ item, setTodos, handleDeleteTodo, handleEnterKey }) {
 			)
 		);
 	};
-
+	const handleChangeCategory = (e) => {};
 	return (
 		<li id={item?.id} className="todo_item">
 			<div className="todo_items_left">
@@ -86,7 +86,10 @@ function Item({ item, setTodos, handleDeleteTodo, handleEnterKey }) {
 						}}
 					/>
 				</label>
-				<Categories category={item?.category} />
+				<Categories
+					category={item?.category}
+					changeHandler={handleChangeCategory}
+				/>
 				<button onClick={() => handleDeleteTodo(item.id)}>
 					<span className="visually-hidden">&#10006;</span>
 				</button>

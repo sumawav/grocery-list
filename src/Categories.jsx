@@ -1,6 +1,6 @@
 // src/Categories.jsx
 
-function Categories({ category }) {
+function Categories({ category, changeHandler }) {
 	const foodLibrary = {
 		Produce: [],
 		Meat: [],
@@ -20,7 +20,7 @@ function Categories({ category }) {
 	};
 
 	return (
-		<select name="selectedCategory" value={category}>
+		<select name="selectedCategory" value={category} onChange={changeHandler}>
 			{Object.keys(foodLibrary).map((title) => (
 				<option key={title} value={`${title}`}>
 					{title}
