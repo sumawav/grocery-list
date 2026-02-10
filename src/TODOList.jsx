@@ -20,9 +20,12 @@ function TODOList({ todos, setTodos }) {
 			title: "",
 			id: window.self.crypto.randomUUID(),
 			is_completed: false,
-			category: "Wet Produce",
+			category: "Haba",
 		};
 		setTodos((pTodos) => pTodos.toSpliced(index + 1, 0, newTodo));
+	};
+	const handleUpKey = (item) => {
+		const index = todos.findIndex((t) => t.id === item.id);
 	};
 	return (
 		<div>
@@ -40,7 +43,7 @@ function TODOList({ todos, setTodos }) {
 									key={index}
 									item={item}
 									setTodos={setTodos}
-									handleEnterKey={() => handleEnterKey(item)}
+									handleEnterKey={handleEnterKey}
 									handleDeleteTodo={handleDeleteTodo}
 								/>
 							))
@@ -50,7 +53,13 @@ function TODOList({ todos, setTodos }) {
 	);
 }
 
-function Item({ item, setTodos, handleDeleteTodo, handleEnterKey }) {
+function Item({
+	item,
+	setTodos,
+	handleDeleteTodo,
+	handleEnterKey,
+	handleUpKey,
+}) {
 	const [isEditing, setEditing] = React.useState(false);
 	const handleToggleTodo = (id) => {
 		setTodos((prevTodos) =>
@@ -86,11 +95,13 @@ function Item({ item, setTodos, handleDeleteTodo, handleEnterKey }) {
 						value={item?.title}
 						type="text"
 						name="updatetodo"
+						autoComplete="off"
 						id="updatetodo"
 						placeholder="write something!"
 						onChange={handleUpdateTodos}
 						onKeyDown={(e) => {
-							if (e.key === "Enter") handleEnterKey(e);
+							if (e.key === "Enter") handleEnterKey(item);
+							if (e.key === "ArrowUp") handleUpKey(e);
 						}}
 					/>
 				</label>
