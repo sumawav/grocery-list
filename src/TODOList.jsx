@@ -61,7 +61,7 @@ function Item({ item, setTodos, handleDeleteTodo, handleEnterKey }) {
 			)
 		);
 	};
-	const handleUpdateTodos_WIP = (e) => {
+	const handleUpdateTodos = (e) => {
 		const text = e.target.value;
 		setTodos((pTodos) =>
 			pTodos.map((pt) =>
@@ -69,7 +69,15 @@ function Item({ item, setTodos, handleDeleteTodo, handleEnterKey }) {
 			)
 		);
 	};
-	const handleChangeCategory = (e) => {};
+	const handleChangeCategory = (e) => {
+		const newCat = e.target.value;
+		console.log(newCat);
+		setTodos((pTodos) =>
+			pTodos.map((pt) =>
+				pt.id === item.id ? { ...pt, category: newCat } : pt
+			)
+		);
+	};
 	return (
 		<li id={item?.id} className="todo_item">
 			<div className="todo_items_left">
@@ -80,7 +88,7 @@ function Item({ item, setTodos, handleDeleteTodo, handleEnterKey }) {
 						name="updatetodo"
 						id="updatetodo"
 						placeholder="write something!"
-						onChange={handleUpdateTodos_WIP}
+						onChange={handleUpdateTodos}
 						onKeyDown={(e) => {
 							if (e.key === "Enter") handleEnterKey(e);
 						}}
