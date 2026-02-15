@@ -4,6 +4,7 @@ import Categories from "./Categories";
 
 function TODOList({ todos, setTodos }) {
 	const [isSorted, setSorted] = React.useState(false);
+	const listRef = React.useRef(0);
 
 	const handleDeleteTodo = (id) => {
 		const newTodos = todos.filter((todo) => todo.id !== id);
@@ -26,6 +27,7 @@ function TODOList({ todos, setTodos }) {
 	};
 	const handleUpKey = (item) => {
 		const index = todos.findIndex((t) => t.id === item.id);
+		console.log(listRef.current);
 	};
 	return (
 		<div>
@@ -34,7 +36,7 @@ function TODOList({ todos, setTodos }) {
 					<p>{isSorted ? "UNSORT" : "SORT"}</p>
 				</button>
 			</div>
-			<ol className="todo_list">
+			<ol className="todo_list" ref={listRef}>
 				{todos && todos.length > 0
 					? todos
 							?.toSorted(isSorted ? alphabetic : undefined)
@@ -45,6 +47,7 @@ function TODOList({ todos, setTodos }) {
 									setTodos={setTodos}
 									handleEnterKey={handleEnterKey}
 									handleDeleteTodo={handleDeleteTodo}
+									handleUpkey={handleUpKey}
 								/>
 							))
 					: null}
