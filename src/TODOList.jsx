@@ -47,7 +47,7 @@ function TODOList({ todos, setTodos }) {
 									setTodos={setTodos}
 									handleEnterKey={handleEnterKey}
 									handleDeleteTodo={handleDeleteTodo}
-									handleUpkey={handleUpKey}
+									handleUpKey={handleUpKey}
 								/>
 							))
 					: null}
@@ -104,7 +104,7 @@ function Item({
 						onChange={handleUpdateTodos}
 						onKeyDown={(e) => {
 							if (e.key === "Enter") handleEnterKey(item);
-							if (e.key === "ArrowUp") handleUpKey(e);
+							if (e.key === "ArrowUp") handleUpKey(item);
 						}}
 					/>
 				</label>
