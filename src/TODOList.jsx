@@ -27,7 +27,20 @@ function TODOList({ todos, setTodos }) {
 	};
 	const handleUpKey = (item) => {
 		const index = todos.findIndex((t) => t.id === item.id);
-		console.log(listRef.current);
+		if (index == 0) return;
+		console.log(
+			listRef.current.children[index - 1].getElementsByTagName("input")[0]
+		);
+		listRef.current.children[index - 1]
+			.getElementsByTagName("input")[0]
+			.focus();
+	};
+	const handleDownKey = (item) => {
+		const index = todos.findIndex((t) => t.id === item.id);
+		if (index >= listRef.current.children.length - 1) return;
+		listRef.current.children[index - 1]
+			.getElementsByTagName("input")[0]
+			.focus();
 	};
 	return (
 		<div>
