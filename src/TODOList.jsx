@@ -26,12 +26,15 @@ function TODOList({ todos, setTodos }) {
 		setTodos((pTodos) => pTodos.toSpliced(index + 1, 0, newTodo));
 	};
 	const handleUpKey = (item) => {
-		const index = todos.findIndex((t) => t.id === item.id);
+		// const index = todos.findIndex((t) => t.id === item.id);
+		const listElements = listRef.current.children;
+		const index = Array.from(listElements).findIndex((elem) => elem.id === item.id);
 		if (index == 0) return;
+		// remove below SOUMA TODO
 		console.log(
 			listRef.current.children[index - 1].getElementsByTagName("input")[0]
 		);
-		listRef.current.children[index - 1]
+		listElements[index - 1]
 			.getElementsByTagName("input")[0]
 			.focus();
 	};
@@ -112,7 +115,7 @@ function Item({
 						type="text"
 						name="updatetodo"
 						autoComplete="off"
-						id="updatetodo"
+						id={item?.id}
 						placeholder="write something!"
 						onChange={handleUpdateTodos}
 						onKeyDown={(e) => {
