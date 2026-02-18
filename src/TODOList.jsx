@@ -10,11 +10,8 @@ function TODOList({ todos, setTodos }) {
 		const newTodos = todos.filter((todo) => todo.id !== id);
 		setTodos(newTodos);
 	};
-
 	const handleToggleSort = () => setSorted((pSort) => !pSort);
-
 	const alphabetic = (a, b) => (a.category < b.category ? -1 : 1);
-
 	const handleEnterKey = (item) => {
 		const index = todos.findIndex((t) => t.id === item.id);
 		const newTodo = {
@@ -26,24 +23,20 @@ function TODOList({ todos, setTodos }) {
 		setTodos((pTodos) => pTodos.toSpliced(index + 1, 0, newTodo));
 	};
 	const handleUpKey = (item) => {
-		// const index = todos.findIndex((t) => t.id === item.id);
 		const listElements = listRef.current.children;
-		const index = Array.from(listElements).findIndex((elem) => elem.id === item.id);
-		if (index == 0) return;
-		// remove below SOUMA TODO
-		console.log(
-			listRef.current.children[index - 1].getElementsByTagName("input")[0]
+		const index = Array.from(listElements).findIndex(
+			(elem) => elem.id === item.id
 		);
-		listElements[index - 1]
-			.getElementsByTagName("input")[0]
-			.focus();
+		if (index == 0) return;
+		listElements[index - 1].getElementsByTagName("input")[0].focus();
 	};
 	const handleDownKey = (item) => {
-		const index = todos.findIndex((t) => t.id === item.id);
-		if (index >= listRef.current.children.length - 1) return;
-		listRef.current.children[index - 1]
-			.getElementsByTagName("input")[0]
-			.focus();
+		const listElements = listRef.current.children;
+		const index = Array.from(listElements).findIndex(
+			(elem) => elem.id === item.id
+		);
+		if (index == Array.from(listElements).length - 1) return;
+		listElements[index + 1].getElementsByTagName("input")[0].focus();
 	};
 	return (
 		<div>
@@ -64,6 +57,7 @@ function TODOList({ todos, setTodos }) {
 									handleEnterKey={handleEnterKey}
 									handleDeleteTodo={handleDeleteTodo}
 									handleUpKey={handleUpKey}
+									handleDownKey={handleDownKey}
 								/>
 							))
 					: null}
@@ -78,6 +72,7 @@ function Item({
 	handleDeleteTodo,
 	handleEnterKey,
 	handleUpKey,
+	handleDownKey,
 }) {
 	const [isEditing, setEditing] = React.useState(false);
 	const handleToggleTodo = (id) => {
@@ -121,6 +116,7 @@ function Item({
 						onKeyDown={(e) => {
 							if (e.key === "Enter") handleEnterKey(item);
 							if (e.key === "ArrowUp") handleUpKey(item);
+							if (e.key === "ArrowDown") handleDownKey(item);
 						}}
 					/>
 				</label>
