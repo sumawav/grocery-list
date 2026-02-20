@@ -5,7 +5,15 @@ import Categories from "./Categories";
 function TODOList({ todos, setTodos }) {
 	const [isSorted, setSorted] = React.useState(false);
 	const listRef = React.useRef(0);
+
 	const alphabetic = (a, b) => (a.category < b.category ? -1 : 1);
+	const getElementsAndIndex = (item) => {
+		const listElements = listRef.current.children;
+		const index = Array.from(listElements).findIndex(
+			(elem) => elem.id === item.id
+		);
+		return [listElements, index];
+	};
 
 	const handleDeleteTodo = (id) => {
 		const newTodos = todos.filter((todo) => todo.id !== id);
@@ -23,27 +31,19 @@ function TODOList({ todos, setTodos }) {
 		setTodos((pTodos) => pTodos.toSpliced(index + 1, 0, newTodo));
 	};
 	const handleUpKey = (item) => {
-		const listElements = listRef.current.children;
-		const index = Array.from(listElements).findIndex(
-			(elem) => elem.id === item.id
-		);
+		const [listElements, index] = getElementsAndIndex(item);
 		if (index == 0) return;
 		listElements[index - 1].getElementsByTagName("input")[0].focus();
 	};
 	const handleDownKey = (item) => {
-		const listElements = listRef.current.children;
-		const index = Array.from(listElements).findIndex(
-			(elem) => elem.id === item.id
-		);
+		const [listElements, index] = getElementsAndIndex(item);
 		if (index == Array.from(listElements).length - 1) return;
 		listElements[index + 1].getElementsByTagName("input")[0].focus();
 	};
 	const handleDelKey = (item) => {
-		const listElements = listRef.current.children;
-		const index = Array.from(listElements).findIndex(
-			(elem) => elem.id === item.id
-		);
-		const caretPos = listElements[index].getElementsByTagName("input")[0].selectionStart;
+		const [listElements, index] = getElementsAndIndex(item);
+		const caretPos =
+			listElements[index].getElementsByTagName("input")[0].selectionStart;
 		if (caretPos === 0) handleDeleteTodo(item.id);
 	};
 	return (
