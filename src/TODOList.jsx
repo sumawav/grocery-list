@@ -6,6 +6,7 @@ function TODOList({ todos, setTodos }) {
 	const [isSorted, setSorted] = React.useState(false);
 	const listRef = React.useRef(0);
 
+	// helper functions	
 	const alphabetic = (a, b) => (a.category < b.category ? -1 : 1);
 	const getElementsAndIndex = (item) => {
 		const listElements = listRef.current.children;
@@ -15,6 +16,7 @@ function TODOList({ todos, setTodos }) {
 		return [listElements, index];
 	};
 
+	// handlers
 	const handleDeleteTodo = (id) => {
 		const newTodos = todos.filter((todo) => todo.id !== id);
 		setTodos(newTodos);
@@ -84,7 +86,7 @@ function Item({
 	handleDownKey,
 	handleDelKey,
 }) {
-	const [isEditing, setEditing] = React.useState(false);
+	// const [isEditing, setEditing] = React.useState(false);
 	const handleToggleTodo = (id) => {
 		setTodos((prevTodos) =>
 			prevTodos.map((todo) =>
