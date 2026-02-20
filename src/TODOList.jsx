@@ -5,13 +5,13 @@ import Categories from "./Categories";
 function TODOList({ todos, setTodos }) {
 	const [isSorted, setSorted] = React.useState(false);
 	const listRef = React.useRef(0);
+	const alphabetic = (a, b) => (a.category < b.category ? -1 : 1);
 
 	const handleDeleteTodo = (id) => {
 		const newTodos = todos.filter((todo) => todo.id !== id);
 		setTodos(newTodos);
 	};
 	const handleToggleSort = () => setSorted((pSort) => !pSort);
-	const alphabetic = (a, b) => (a.category < b.category ? -1 : 1);
 	const handleEnterKey = (item) => {
 		const index = todos.findIndex((t) => t.id === item.id);
 		const newTodo = {
@@ -38,6 +38,14 @@ function TODOList({ todos, setTodos }) {
 		if (index == Array.from(listElements).length - 1) return;
 		listElements[index + 1].getElementsByTagName("input")[0].focus();
 	};
+	const handleDelKey = (item) => {
+		const listElements = listRef.current.children;
+		const index = Array.from(listElements).findIndex(
+			(elem) => elem.id === item.id
+		);
+		const caretPos = listElements[index].getElementsByTagName("input")[0].selectionStart;
+		if (caretPos === 0) handleDeleteTodo(item.id);
+	};
 	return (
 		<div>
 			<div className="todo_items_left">
@@ -58,6 +66,7 @@ function TODOList({ todos, setTodos }) {
 									handleDeleteTodo={handleDeleteTodo}
 									handleUpKey={handleUpKey}
 									handleDownKey={handleDownKey}
+									handleDelKey={handleDelKey}
 								/>
 							))
 					: null}
@@ -73,6 +82,7 @@ function Item({
 	handleEnterKey,
 	handleUpKey,
 	handleDownKey,
+	handleDelKey,
 }) {
 	const [isEditing, setEditing] = React.useState(false);
 	const handleToggleTodo = (id) => {
@@ -117,6 +127,7 @@ function Item({
 							if (e.key === "Enter") handleEnterKey(item);
 							if (e.key === "ArrowUp") handleUpKey(item);
 							if (e.key === "ArrowDown") handleDownKey(item);
+							if (e.key === "Backspace") handleDelKey(item);
 						}}
 					/>
 				</label>

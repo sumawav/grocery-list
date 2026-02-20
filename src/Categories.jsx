@@ -17,6 +17,8 @@ function Categories({ category, changeHandler }) {
 		Snacks: [],
 		Haba: [],
 		DFN: [],
+		Beverages: [],
+		Alcohol: [],
 	};
 
 	return (
