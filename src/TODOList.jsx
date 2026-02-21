@@ -116,23 +116,21 @@ function Item({
 	return (
 		<li id={item?.id} className="todo_item">
 			<div className="todo_items_left">
-				<label htmlFor="updatetodo">
-					<input
-						value={item?.title}
-						type="text"
-						name="updatetodo"
-						autoComplete="off"
-						id={item?.id}
-						placeholder="write something!"
-						onChange={handleUpdateTodos}
-						onKeyDown={(e) => {
-							if (e.key === "Enter") handleEnterKey(item);
-							if (e.key === "ArrowUp") handleUpKey(item);
-							if (e.key === "ArrowDown") handleDownKey(item);
-							if (e.key === "Backspace") handleDelKey(item);
-						}}
-					/>
-				</label>
+				<input
+					value={item?.title}
+					type="text"
+					name="updatetodo"
+					autoComplete="off"
+					id={item?.id}
+					placeholder="write something!"
+					onChange={handleUpdateTodos}
+					onKeyDown={(e) => {
+						if (e.key === "Enter") handleEnterKey(item);
+						if (e.key === "ArrowUp") handleUpKey(item);
+						if (e.key === "ArrowDown") handleDownKey(item);
+						if (e.key === "Backspace") handleDelKey(item);
+					}}
+				/>
 				<input
 					type="checkbox"
 					checked={item?.is_completed}
