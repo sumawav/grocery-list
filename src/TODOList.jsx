@@ -6,7 +6,7 @@ function TODOList({ todos, setTodos }) {
 	const [isSorted, setSorted] = React.useState(false);
 	const listRef = React.useRef(0);
 
-	// helper functions	
+	// helper functions
 	const alphabetic = (a, b) => (a.category < b.category ? -1 : 1);
 	const getElementsAndIndex = (item) => {
 		const listElements = listRef.current.children;
@@ -133,6 +133,11 @@ function Item({
 						}}
 					/>
 				</label>
+				<input
+					type="checkbox"
+					checked={item?.is_completed}
+					onChange={() => handleToggleTodo(item.id)}
+				/>
 				<Categories
 					category={item?.category}
 					changeHandler={handleChangeCategory}
@@ -140,7 +145,6 @@ function Item({
 				<button onClick={() => handleDeleteTodo(item.id)}>
 					<span className="visually-hidden">&#10006;</span>
 				</button>
-				<span>{item.is_completed ? "COMPLETE" : ""}</span>
 			</div>
 		</li>
 	);

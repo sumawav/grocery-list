@@ -19,7 +19,7 @@ function App() {
 		{
 			title: "Garbanzo Beans",
 			id: window.self.crypto.randomUUID(),
-			is_completed: false,
+			is_completed: true,
 			category: "Grocery",
 		},
 		{
