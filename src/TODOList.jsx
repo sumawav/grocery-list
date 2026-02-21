@@ -1,7 +1,7 @@
 // src/components/TODOList.jsx
 import React from "react";
 import Item from "./Item";
-
+import "./TODOList.css";
 
 function TODOList({ todos, setTodos }) {
 	const [isSorted, setSorted] = React.useState(false);
@@ -38,23 +38,23 @@ function TODOList({ todos, setTodos }) {
 	const handleUpKey = (item) => {
 		const [listElements, index] = getElementsAndIndex(item);
 		if (index == 0) return;
-		listElements[index - 1].getElementsByTagName("input")[0].focus();
+		listElements[index - 1].getElementsByClassName("todo-text-input")[0].focus();
 	};
 	const handleDownKey = (item) => {
 		const [listElements, index] = getElementsAndIndex(item);
 		if (index == Array.from(listElements).length - 1) return;
-		listElements[index + 1].getElementsByTagName("input")[0].focus();
+		listElements[index + 1].getElementsByClassName("todo-text-input")[0].focus();
 	};
 	const handleDelKey = (item) => {
 		const [listElements, index] = getElementsAndIndex(item);
 		const caretPos =
-			listElements[index].getElementsByTagName("input")[0].selectionStart;
+			listElements[index].getElementsByClassName("todo-text-input")[0].selectionStart;
 		if (caretPos === 0) {
 			handleDeleteTodo(item.id);
 			console.log(index);
 			if (index === Array.from(listElements).length - 1)
 				listElements[index - 1]
-					.getElementsByTagName("input")[0]
+					.getElementsByClassName("todo-text-input")[0]
 					.focus();
 		}
 	};
@@ -65,7 +65,7 @@ function TODOList({ todos, setTodos }) {
 					<p>{isSorted ? "UNSORT" : "SORT"}</p>
 				</button>
 			</div>
-			<ol className="todo_list" ref={listRef}>
+			<ul className="todo-list" ref={listRef}>
 				{todos && todos.length > 0
 					? todos
 							?.toSorted(isSorted ? alphabetic : undefined)
@@ -82,82 +82,9 @@ function TODOList({ todos, setTodos }) {
 								/>
 							))
 					: null}
-			</ol>
+			</ul>
 		</div>
 	);
 }
-/*
-function Item({
-	item,
-	setTodos,
-	handleDeleteTodo,
-	handleEnterKey,
-	handleUpKey,
-	handleDownKey,
-	handleDelKey,
-}) {
-	// const [isEditing, setEditing] = React.useState(false);
-	const handleToggleTodo = (id) => {
-		setTodos((prevTodos) =>
-			prevTodos.map((todo) =>
-				todo.id === id
-					? { ...todo, is_completed: !todo.is_completed }
-					: todo
-			)
-		);
-	};
-	const handleUpdateTodos = (e) => {
-		const text = e.target.value;
-		setTodos((pTodos) =>
-			pTodos.map((pt) =>
-				pt.id === item.id ? { ...pt, title: text } : pt
-			)
-		);
-	};
-	const handleChangeCategory = (e) => {
-		const newCat = e.target.value;
-		console.log(newCat);
-		setTodos((pTodos) =>
-			pTodos.map((pt) =>
-				pt.id === item.id ? { ...pt, category: newCat } : pt
-			)
-		);
-	};
-	return (
-		<li id={item?.id} className="todo_item">
-			<div className="todo_items_left">
-				<input
-					value={item?.title}
-					disabled={item?.is_completed}
-					type="text"
-					name="updatetodo"
-					autoComplete="off"
-					id={item?.id}
-					placeholder="write something!"
-					onChange={handleUpdateTodos}
-					onKeyDown={(e) => {
-						if (e.key === "Enter") handleEnterKey(item);
-						if (e.key === "ArrowUp") handleUpKey(item);
-						if (e.key === "ArrowDown") handleDownKey(item);
-						if (e.key === "Backspace") handleDelKey(item);
-					}}
-				/>
-				<input
-					type="checkbox"
-					checked={item?.is_completed}
-					onChange={() => handleToggleTodo(item.id)}
-				/>
-				<Categories
-					category={item?.category}
-					disabled={item?.is_completed}
-					changeHandler={handleChangeCategory}
-				/>
-				<button onClick={() => handleDeleteTodo(item.id)}>
-					<span className="visually-hidden">&#10006;</span>
-				</button>
-			</div>
-		</li>
-	);
-}
-*/
+
 export default TODOList;

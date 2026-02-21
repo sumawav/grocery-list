@@ -1,6 +1,7 @@
 // src/components/Item.jsx
 import React from "react";
 import Categories from "./Categories";
+import "./Item.css";
 
 function Item({
 	item,
@@ -42,13 +43,18 @@ function Item({
 		<li id={item?.id} className="todo_item">
 			<div className="todo_items_left">
 				<input
+					type="checkbox"
+					checked={item?.is_completed}
+					onChange={() => handleToggleTodo(item.id)}
+				/>
+				<input
+					className="todo-text-input"
 					value={item?.title}
-					disabled={item?.is_completed}
 					type="text"
 					name="updatetodo"
 					autoComplete="off"
 					id={item?.id}
-					placeholder="write something!"
+					placeholder="add food!"
 					onChange={handleUpdateTodos}
 					onKeyDown={(e) => {
 						if (e.key === "Enter") handleEnterKey(item);
@@ -57,14 +63,8 @@ function Item({
 						if (e.key === "Backspace") handleDelKey(item);
 					}}
 				/>
-				<input
-					type="checkbox"
-					checked={item?.is_completed}
-					onChange={() => handleToggleTodo(item.id)}
-				/>
 				<Categories
 					category={item?.category}
-					disabled={item?.is_completed}
 					changeHandler={handleChangeCategory}
 				/>
 				<button onClick={() => handleDeleteTodo(item.id)}>
@@ -74,6 +74,5 @@ function Item({
 		</li>
 	);
 }
-
 
 export default Item;
