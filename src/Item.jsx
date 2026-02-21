@@ -48,7 +48,7 @@ function Item({
 					onChange={() => handleToggleTodo(item.id)}
 				/>
 				<input
-					className="todo-text-input"
+					className="todo-text-input border-delete"
 					value={item?.title}
 					type="text"
 					name="updatetodo"

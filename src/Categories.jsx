@@ -1,4 +1,5 @@
 // src/Categories.jsx
+import "./Categories.css";
 
 function Categories({ category, changeHandler, disabled }) {
 	const foodLibrary = {
@@ -22,7 +23,13 @@ function Categories({ category, changeHandler, disabled }) {
 	};
 
 	return (
-		<select name="selectedCategory" disabled={disabled} value={category} onChange={changeHandler}>
+		<select
+			className="border-delete"
+			name="selectedCategory"
+			disabled={disabled}
+			value={category}
+			onChange={changeHandler}
+		>
 			{Object.keys(foodLibrary).map((title) => (
 				<option key={title} value={`${title}`}>
 					{title}
