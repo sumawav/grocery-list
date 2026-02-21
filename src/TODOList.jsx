@@ -127,6 +127,7 @@ function Item({
 			<div className="todo_items_left">
 				<input
 					value={item?.title}
+					disabled={item?.is_completed}
 					type="text"
 					name="updatetodo"
 					autoComplete="off"
@@ -147,6 +148,7 @@ function Item({
 				/>
 				<Categories
 					category={item?.category}
+					disabled={item?.is_completed}
 					changeHandler={handleChangeCategory}
 				/>
 				<button onClick={() => handleDeleteTodo(item.id)}>
