@@ -23,6 +23,7 @@ function TODOList({ todos, setTodos }) {
 	};
 	const handleToggleSort = () => setSorted((pSort) => !pSort);
 	const handleEnterKey = (item) => {
+		if (isSorted) return;
 		const index = todos.findIndex((t) => t.id === item.id);
 		const newTodo = {
 			title: "",
@@ -31,6 +32,7 @@ function TODOList({ todos, setTodos }) {
 			category: "Haba",
 		};
 		setTodos((pTodos) => pTodos.toSpliced(index + 1, 0, newTodo));
+		
 	};
 	const handleUpKey = (item) => {
 		const [listElements, index] = getElementsAndIndex(item);
@@ -46,7 +48,14 @@ function TODOList({ todos, setTodos }) {
 		const [listElements, index] = getElementsAndIndex(item);
 		const caretPos =
 			listElements[index].getElementsByTagName("input")[0].selectionStart;
-		if (caretPos === 0) handleDeleteTodo(item.id);
+		if (caretPos === 0) {
+			handleDeleteTodo(item.id);
+			console.log(index);
+			if (index === Array.from(listElements).length - 1)
+				listElements[index - 1]
+					.getElementsByTagName("input")[0]
+					.focus();
+		}
 	};
 	return (
 		<div>
