@@ -1,6 +1,7 @@
 // src/components/TODOList.jsx
 import React from "react";
-import Categories from "./Categories";
+import Item from "./Item";
+
 
 function TODOList({ todos, setTodos }) {
 	const [isSorted, setSorted] = React.useState(false);
@@ -85,7 +86,7 @@ function TODOList({ todos, setTodos }) {
 		</div>
 	);
 }
-
+/*
 function Item({
 	item,
 	setTodos,
@@ -158,5 +159,5 @@ function Item({
 		</li>
 	);
 }
-
+*/
 export default TODOList;
