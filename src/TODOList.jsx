@@ -54,7 +54,6 @@ function TODOList({ todos, setTodos }) {
 			listElements[index].getElementsByClassName("todo-text-input")[0].selectionStart;
 		if (caretPos === 0) {
 			handleDeleteTodo(item.id);
-			console.log(index);
 			if (index === Array.from(listElements).length - 1)
 				listElements[index - 1]
 					.getElementsByClassName("todo-text-input")[0]
