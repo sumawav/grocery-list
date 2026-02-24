@@ -52,7 +52,7 @@ function TODOList({ todos, setTodos }) {
 		const [listElements, index] = getElementsAndIndex(item);
 		const caretPos =
 			listElements[index].getElementsByClassName("todo-text-input")[0].selectionStart;
-		if (caretPos === 0) {
+		if (caretPos === 0 && !item.title) {
 			handleDeleteTodo(item.id);
 			if (index === Array.from(listElements).length - 1)
 				listElements[index - 1]
