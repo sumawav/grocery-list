@@ -26,6 +26,11 @@ function TODOList({ todos, setTodos }) {
 	};
 
 	// handlers
+	const handleLocalSave = () => {
+		console.log(todos);
+
+
+	}
 	const handleDeleteTodo = (id) => {
 		const newTodos = todos.filter((todo) => todo.id !== id);
 		setTodos(newTodos);
@@ -69,6 +74,9 @@ function TODOList({ todos, setTodos }) {
 			<div className="todo_items_left">
 				<button onClick={handleToggleSort}>
 					<p>{isSorted ? "UNSORT" : "SORT"}</p>
+				</button>
+				<button onClick={handleLocalSave}>
+					<p>SAVE LOCALLY</p>
 				</button>
 			</div>
 			<ul className="todo-list" ref={listRef}>
