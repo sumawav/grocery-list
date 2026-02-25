@@ -16,6 +16,9 @@ function TODOList({ todos, setTodos }) {
 		);
 		return [listElements, index];
 	};
+	const isLast = (listElements, index) => {
+		return Array.from(listElements).length - 1 === index;
+	};
 	const makeFocus = (listElements, index) => {
 		listElements[index]
 			.getElementsByClassName("todo-text-input")[0]
@@ -38,7 +41,7 @@ function TODOList({ todos, setTodos }) {
 			category: "Haba",
 		};
 		setTodos((pTodos) => pTodos.toSpliced(index + 1, 0, newTodo));
-		if (Array.from(listElements).length - 1 === index) return;
+		if (isLast(listElements, index)) return;
 		makeFocus(listElements, index + 1);
 	};
 	const handleUpKey = (item) => {
@@ -48,7 +51,7 @@ function TODOList({ todos, setTodos }) {
 	};
 	const handleDownKey = (item) => {
 		const [listElements, index] = getElementsAndIndex(item);
-		if (index == Array.from(listElements).length - 1) return;
+		if (isLast(listElements, index)) return;
 		makeFocus(listElements, index + 1);
 	};
 	const handleDelKey = (item) => {
@@ -58,8 +61,7 @@ function TODOList({ todos, setTodos }) {
 				.selectionStart;
 		if (caretPos === 0 && !item.title) {
 			handleDeleteTodo(item.id);
-			if (index === Array.from(listElements).length - 1)
-				makeFocus(listElements, index - 1);
+			if (isLast(listElements, index)) makeFocus(listElements, index - 1);
 		}
 	};
 	return (
