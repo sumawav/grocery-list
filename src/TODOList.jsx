@@ -16,6 +16,11 @@ function TODOList({ todos, setTodos }) {
 		);
 		return [listElements, index];
 	};
+	const makeFocus = (listElements, index) => {
+		listElements[index]
+			.getElementsByClassName("todo-text-input")[0]
+			.focus();
+	};
 
 	// handlers
 	const handleDeleteTodo = (id) => {
@@ -26,7 +31,6 @@ function TODOList({ todos, setTodos }) {
 	const handleEnterKey = (item) => {
 		if (isSorted) return;
 		const [listElements, index] = getElementsAndIndex(item);
-		// const index = todos.findIndex((t) => t.id === item.id);
 		const newTodo = {
 			title: "",
 			id: window.self.crypto.randomUUID(),
@@ -35,29 +39,27 @@ function TODOList({ todos, setTodos }) {
 		};
 		setTodos((pTodos) => pTodos.toSpliced(index + 1, 0, newTodo));
 		if (Array.from(listElements).length - 1 === index) return;
-		listElements[index + 1].getElementsByClassName("todo-text-input")[0].focus();
-		
+		makeFocus(listElements, index + 1);
 	};
 	const handleUpKey = (item) => {
 		const [listElements, index] = getElementsAndIndex(item);
 		if (index == 0) return;
-		listElements[index - 1].getElementsByClassName("todo-text-input")[0].focus();
+		makeFocus(listElements, index - 1);
 	};
 	const handleDownKey = (item) => {
 		const [listElements, index] = getElementsAndIndex(item);
 		if (index == Array.from(listElements).length - 1) return;
-		listElements[index + 1].getElementsByClassName("todo-text-input")[0].focus();
+		makeFocus(listElements, index + 1);
 	};
 	const handleDelKey = (item) => {
 		const [listElements, index] = getElementsAndIndex(item);
 		const caretPos =
-			listElements[index].getElementsByClassName("todo-text-input")[0].selectionStart;
+			listElements[index].getElementsByClassName("todo-text-input")[0]
+				.selectionStart;
 		if (caretPos === 0 && !item.title) {
 			handleDeleteTodo(item.id);
 			if (index === Array.from(listElements).length - 1)
-				listElements[index - 1]
-					.getElementsByClassName("todo-text-input")[0]
-					.focus();
+				makeFocus(listElements, index - 1);
 		}
 	};
 	return (

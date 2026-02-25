@@ -53,7 +53,6 @@ function Item({
 					type="text"
 					name="updatetodo"
 					autoComplete="off"
-					id={item?.id}
 					placeholder="add food!"
 					onChange={handleUpdateTodos}
 					onKeyDown={(e) => {
