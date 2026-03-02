@@ -7,6 +7,18 @@ function TODOList({ todos, setTodos }) {
 	const [isSorted, setSorted] = React.useState(false);
 	const listRef = React.useRef(0);
 
+	React.useEffect(() => {
+		const storedList = localStorage.getItem("groceryList");
+
+		console.log("CALLED USE EFFECT");
+
+		if (storedList) {
+			console.log("found local Storage");
+			console.log(storedList);
+			// setTodos(storedList);
+		}
+	}, []);
+
 	// helper functions
 	const alphabetic = (a, b) => (a.category < b.category ? -1 : 1);
 	const getElementsAndIndex = (item) => {
@@ -28,9 +40,7 @@ function TODOList({ todos, setTodos }) {
 	// handlers
 	const handleLocalSave = () => {
 		console.log(todos);
-
-
-	}
+	};
 	const handleDeleteTodo = (id) => {
 		const newTodos = todos.filter((todo) => todo.id !== id);
 		setTodos(newTodos);
