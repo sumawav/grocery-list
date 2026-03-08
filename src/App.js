@@ -9,6 +9,8 @@ import TODOList from "./TODOList";
 // superficial change to test git
 
 function App() {
+	const [todos, setTodos] = React.useState([]);
+	/*
 	const [todos, setTodos] = React.useState([
 		{
 			title: "Broccoli",
@@ -30,6 +32,19 @@ function App() {
 			current: true,
 		},
 	]);
+	*/
+
+	React.useEffect(() => {
+		const storedList = localStorage.getItem("groceryList");
+
+		console.log("CALLED USE EFFECT");
+
+		if (storedList) {
+			console.log("found local Storage");
+			console.log(storedList);
+			// setTodos(storedList);
+		}
+	}, []);
 
 	const todos_completed = todos.filter((todo) => todo.is_completed).length;
 	const total_todos = todos.length;
